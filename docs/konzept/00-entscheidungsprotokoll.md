@@ -97,5 +97,7 @@ Siehe Roadmap in 05. Nicht Teil dieser Etappe.
 
 ## Notizen / offene Punkte
 
-- **graphify:** Rechercheergebnis wird hier nachgetragen
-- **everything-claude-code:** Fundliste wird hier verlinkt, sobald gesichtet
+- **Werkbank-Status, graphify-Recherche und everything-claude-code-Fundliste:**
+  siehe [werkbank.md](../werkbank.md) (Stand 17.07.2026)
+- **Offen:** Installation „OS Builder Paul" wartet auf Michaels Bestätigung
+  des recherchierten Kandidaten (Details in werkbank.md)
