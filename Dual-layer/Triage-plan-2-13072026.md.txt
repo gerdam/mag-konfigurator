@@ -1,0 +1,56 @@
+Triage-plan-2-13072026.md
+-#-
+Gut — robusteste Variante, und die Debattenhistorie bleibt vollständig nachvollziehbar. Damit sind alle Weichen gestellt. Hier ist mein Entwurf für die Zusammenarbeit — bitte prüfe die Abschnitte, dann schreibe ich ihn als verbindliches Arbeitsprotokoll in den Projektordner.
+
+Entwurf: Trialog-Etappe 2 — kooperative Konzeptarbeit
+1. Ziel der Etappe (der neue Schnitt)
+Die Übergabe vom 13.07. bleibt inhaltlich gültig, wird aber durch vier heutige Beschlüsse nachgeschärft:
+
+Tracer Bullet: Zuerst wird nur das MAG-Rechercheprofil vollständig durchdekliniert. Das Datenmodell behält alle 9 Oberflächen, aber Artefakte entstehen erst für den Beweispfad.
+Stufe 1 als Skizze: Fragenkatalog + Regellogik kompakt, validiert an 3 Papier-Testfällen (Recherche, Finanz-Simulation, Übersetzung).
+Kooperative Arbeitsteilung Claude + Codex mit dir als Entscheider.
+Debattenebene: reine Markdown-Dateien im Arbeitsordner.
+Wichtige Folgerung aus Beschluss 3, die ich vorschlage: Der Tracer Bullet wird stärker, wenn Codex nicht dieselben 3 Claude-Oberflächen prüft, sondern die OpenAI-Gegenprobe baut (dasselbe Profil → ChatGPT-Projekt/Codex/Responses API). Denn die Kernbehauptung des Datenmodells ist Anbieterneutralität — die beweist man nur mit einem zweiten Anbieter, nicht mit dreimal Claude. Gemini bleibt Etappe 3.
+
+2. Ordnerstruktur im Arbeitsordner
+Konfigurator-konfigurator-12072026\
+├── protokolle\          ← die 3 bestehenden Session-Dateien wandern hierhin
+├── trialog\
+│   ├── 00-arbeitsprotokoll.md   ← Regeln, Rollen, Format (entsteht als Erstes)
+│   ├── debatte-datenmodell.md   ← eine Debattendatei je Kernthema
+│   ├── debatte-stufe1-auswahl.md
+│   └── debatte-adapter.md
+└── docs\konzept\
+    ├── 00-entscheidungsprotokoll.md   ← inkl. der 4 heutigen Beschlüsse
+    ├── 01-vision.md … 05-architektur-roadmap.md  (wie Übergabe §13)
+Dazu: git init im Ordner (in PowerShell, gemäß Vault-Regel) — damit jede Debattenrunde diffbar und nichts verlierbar ist. Kein Push, nur lokal.
+
+3. Debattenformat (für beide KIs verbindlich)
+Jede Debattendatei besteht aus nummerierten Blöcken im Format der Übergabe:
+
+## D-003 · Titel der These                    Status: offen | entschieden | verworfen
+**These** (Stimme: Claude|Codex, Datum): …
+**Einwand** (Stimme, Datum): …
+**Entscheidung** (Michael, Datum): …
+**Begründung / Evidenz:** … (Quellen-URLs bei Anbieterfähigkeiten Pflicht)
+**Restoffen:** …
+Regeln: Jede KI ergänzt nur eigene Abschnitte und ändert nie Beiträge der anderen Stimme. Entscheidungen trifft ausschließlich du. UTF-8 Pflicht (wegen der bekannten Kodierungsfehler). Nur entschiedene Blöcke dürfen in die Konzeptdokumente übernommen werden.
+
+4. Arbeitsteilung
+Wer	Aufgabe
+Claude (ich)	Entscheidungsprotokoll 00, Vision 01, Erstentwurf Datenmodell/ConfigIR (02), MAG-Rechercheprofil, Claude-Adapter × 3 Oberflächen, Stufe-1-Skizze
+Codex	Gegenkritik am Datenmodell (Debattendatei), Capability-Recherche OpenAI aus offiziellen Quellen, OpenAI-Adapter-Gegenprobe für dasselbe Profil, Review der Stufe-1-Testfälle
+Du	Entscheidungen im Debattenblock, Priorisierung, Laien-Test („verstehe ich das ohne KI-Wissen?")
+5. Ablauf
+Setup (diese Session): Ordnerstruktur, Git, Arbeitsprotokoll, Entscheidungsprotokoll 00 mit heutigen Beschlüssen, erste Debattendatei mit meiner Datenmodell-These.
+Codex-Runde: Du startest Codex im Arbeitsordner mit einem kurzen Einstiegsprompt (liefere ich dir fertig), Codex liest Arbeitsprotokoll + Debatte und antwortet dort. ⚠️ Vorher codex login — laut Doctor-Report fehlen die Credentials noch.
+Entscheidungsrunde: Du entscheidest offene Blöcke, ich arbeite sie in 02/03 ein.
+Wiederholen bis der Tracer Bullet steht (MAG-Profil → Artefakte für Claude × 3 und OpenAI-Gegenprobe), dann Etappen-Review.
+6. Risiken, die ich benenne
+Zwei-KI-Koordination kostet Reibung. Der Ledger minimiert sie, aber es bleibt langsamer als eine KI allein — dafür fanden die Gegenkritiken bisher echte Lücken. Bewusster Trade-off.
+Capability-Aussagen veralten. Deshalb Quellen-URL + Abrufdatum als Pflichtfeld in jedem Evidenz-Abschnitt.
+Die drei Session-Protokolle enthalten sichtbare Kodierungsartefakte — ich verschiebe sie nur, repariere sie nicht (historische Dokumente).
+Passt dieser Entwurf so — insbesondere (a) die OpenAI-Gegenprobe als Codex-Aufgabe statt dreimal Claude, (b) das Verschieben der Session-Protokolle nach protokolle\ und (c) git init im Arbeitsordner? Wenn ja, lege ich Struktur, Arbeitsprotokoll und Entscheidungsprotokoll an und schreibe die erste Datenmodell-These in die Debatte.
+
+
+-#-

@@ -1,0 +1,21 @@
+Trennung-der2-prdokte-find-skill-ci-modul.txt
+-#-
+find skill für skillsuche installieren
+ci Anwendung vom15072026 einbauen
+bei der Speicherung der Suchergebnisse b-Tree als Speicher nutzen oder B+-tree
+GitHub repo "everything claude Code" 28 subagent 118 Skill engeneering
+
+RLJ
+epr Properties 6,4% DivRendite
+Chevron
+
+pip install markitdown mcp installieren um alle Format zu md umzuwandeln
+
+run graphify in Claude oder?
+
+os Builder Paul in Claude installieren /paul:init
+
+GitHub
+
+/Goal nutzen aber stopp setzen sonst verbrauch Token grenzenlso
+deployen auf Railway oder vercel oder space mieten

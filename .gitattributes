@@ -1,0 +1,8 @@
+# Alle Textdateien: LF im Repo, Arbeitskopie nativ; Markdown und Skripte als UTF-8 behandeln
+* text=auto
+*.md text
+*.txt text
+*.ps1 text
+*.yaml text
+*.yml text
+*.json text
