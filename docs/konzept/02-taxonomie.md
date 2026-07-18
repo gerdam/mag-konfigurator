@@ -16,12 +16,10 @@ Bausteinen er zusammenpasst oder in Konflikt gerät.
 
 - **Identität** — legt fest, *wer* der Assistent in dieser Konfiguration
   ist: seine Rolle, sein Selbstverständnis, sein grundsätzlicher
-  Blickwinkel auf die Aufgabe. Beispiel: Ein Baustein könnte festlegen,
-  dass sich der Assistent als sorgfältiger Rechercheassistent versteht,
-  der Aussagen prüft, bevor er sie präsentiert, statt als lockerer
-  Schreibpartner. (Ein solcher Identitäts-Baustein ist im aktuellen
-  Katalog noch nicht als eigene Datei angelegt; er entsteht mit dem
-  Profilkatalog in 03.)
+  Blickwinkel auf die Aufgabe. Beispiel: der Baustein
+  `rolle-rechercheassistent` (siehe unten), der festlegt, dass sich der
+  Assistent als sorgfältiger Rechercheassistent versteht, der Aussagen
+  prüft, bevor er sie präsentiert, statt als lockerer Schreibpartner.
 - **Verhalten** — legt fest, *wie* der Assistent antwortet: Tonfall,
   Ausführlichkeit, Umgang mit Unsicherheit, wiederkehrende Antwortmuster.
   Beispiel: der Baustein `antwortstil-quellenpflicht` (siehe unten), der
@@ -170,10 +168,15 @@ sich bewusst entscheiden, welchen der beiden Bausteine er aufgibt.
 
 ## Beispiel-Bausteine
 
-Die Taxonomie wurde gegen vier reale Beispiel-Bausteine unter
+Die Taxonomie wurde gegen fünf reale Beispiel-Bausteine unter
 `katalog\bausteine\` geprüft (Papier-Validierung, siehe Bericht). Sie
 tragen gemeinsam das Referenzprofil MAG-Rechercheassistenz aus 03:
 
+- [`rolle-rechercheassistent.yaml`](../../katalog/bausteine/rolle-rechercheassistent.yaml)
+  — Ebene Identität, `wunsch`. Legt fest, dass sich der Assistent als
+  sorgfältiger Rechercheassistent versteht, der Aussagen prüft, statt sie
+  ungeprüft zu präsentieren, und liefert das erste reale Beispiel für
+  diese Ebene.
 - [`antwortstil-quellenpflicht.yaml`](../../katalog/bausteine/antwortstil-quellenpflicht.yaml)
   — Ebene Verhalten, `wunsch`. Verpflichtet den Assistenten zur
   Quellenangabe und ist zugleich das durchgängige Beispiel dieses

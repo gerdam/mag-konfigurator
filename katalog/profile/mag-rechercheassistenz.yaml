@@ -1,0 +1,10 @@
+id: mag-rechercheassistenz
+name: "MAG-Rechercheassistenz"
+beschreibung: >
+  Rechercheassistenz für Michaels Arbeitsalltag (E5) — der Realitätscheck
+  des Konfigurators.
+bausteine:
+  - rolle-rechercheassistent
+  - antwortstil-quellenpflicht
+  - leitplanke-keine-rechtsberatung
+  - werkzeug-websuche
