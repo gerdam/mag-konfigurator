@@ -1,0 +1,29 @@
+id: wissen-nur-freigegebene-quellen
+name: "Wissen: Nur freigegebene Quellen"
+ebene: wissen                          # Pflicht: identitaet | verhalten | wissen | werkzeuge | leitplanken
+art: wunsch                            # wunsch | erzwungen (E6a)
+klartext_wirkung: >
+  Der Assistent stützt Tatsachenaussagen ausschließlich auf Dokumente und
+  Quellen, die der Nutzer vorher ausdrücklich bereitgestellt oder
+  freigegeben hat (z. B. hochgeladene Dateien, verlinkte Notizen) — nicht
+  auf freie Internetrecherche.
+risiken:
+  - "Sind die freigegebenen Quellen unvollständig, bleiben Wissenslücken
+     ungefüllt, statt durch Recherche geschlossen zu werden."
+  - "Erfordert Disziplin beim Pflegen und Aktualisieren der freigegebenen
+     Quellensammlung."
+beziehungen:
+  benoetigt: []
+  verstaerkt: []
+  kollidiert:
+    - werkzeug-websuche
+mappings:                              # genau die 3 Oberflächen (E3)
+  claude-code:
+    adapter_status: supported          # supported | degraded | unsupported (E6c)
+    umsetzung: "Nur Projektdateien im Repository als Wissensquelle referenziert, kein Websuche-Werkzeug aktiviert"
+  claude-ai-projekte:
+    adapter_status: supported
+    umsetzung: "Nur hochgeladenes Projektwissen als Quelle, Websuche im Projekt deaktiviert"
+  api:
+    adapter_status: supported
+    umsetzung: "Kontext ausschließlich aus mitgesendeten Dokumenten, kein Such-Werkzeug im Aufruf definiert"

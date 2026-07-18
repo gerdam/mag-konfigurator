@@ -1,0 +1,27 @@
+id: werkzeug-websuche
+name: "Werkzeug: Websuche"
+ebene: werkzeuge                       # Pflicht: identitaet | verhalten | wissen | werkzeuge | leitplanken
+art: wunsch                            # wunsch | erzwungen (E6a)
+klartext_wirkung: >
+  Der Assistent darf aktiv im Internet nach aktuellen Informationen
+  suchen, statt sich ausschließlich auf sein trainiertes Wissen zu
+  verlassen.
+risiken:
+  - "Suchergebnisse können falsch, veraltet oder tendenziös sein und
+     ungeprüft übernommen werden."
+  - "Zusätzlicher Zeit- und ggf. Kostenaufwand durch die Suchanfragen."
+beziehungen:
+  benoetigt: []
+  verstaerkt: []
+  kollidiert:
+    - wissen-nur-freigegebene-quellen
+mappings:                              # genau die 3 Oberflächen (E3)
+  claude-code:
+    adapter_status: supported          # supported | degraded | unsupported (E6c)
+    umsetzung: "Eingebautes Websuche-Werkzeug bzw. passender MCP-Server wird aktiviert"
+  claude-ai-projekte:
+    adapter_status: degraded
+    umsetzung: "Websuche ist eine globale Chat-Funktion, kein Projekt-Schalter — sie lässt sich für ein Projekt empfehlen, aber nicht erzwingen"
+  api:
+    adapter_status: supported
+    umsetzung: "Serverseitiges Websuche-Werkzeug wird im API-Aufruf aktiviert"

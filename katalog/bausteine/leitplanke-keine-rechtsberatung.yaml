@@ -1,0 +1,29 @@
+id: leitplanke-keine-rechtsberatung
+name: "Leitplanke: Keine Rechtsberatung"
+ebene: leitplanken                     # Pflicht: identitaet | verhalten | wissen | werkzeuge | leitplanken
+art: erzwungen                         # wunsch | erzwungen (E6a)
+klartext_wirkung: >
+  Bei konkreten Rechtsfragen gibt der Assistent keine verbindliche
+  Handlungsempfehlung ab. Er ordnet allgemein verständlich ein, benennt
+  Fundstellen, und verweist für die konkrete Entscheidung ausdrücklich an
+  eine Rechtsanwältin oder einen Rechtsanwalt.
+risiken:
+  - "Nutzer, die eine schnelle Einschätzung für ihren Einzelfall wollten,
+     empfinden den Verweis als unbequem oder ausweichend."
+  - "Die Grenze zwischen allgemeiner Information und konkreter Beratung
+     ist nicht in jedem Fall eindeutig zu ziehen."
+beziehungen:
+  benoetigt: []
+  verstaerkt:
+    - antwortstil-quellenpflicht
+  kollidiert: []
+mappings:                              # genau die 3 Oberflächen (E3)
+  claude-code:
+    adapter_status: supported          # supported | degraded | unsupported (E6c)
+    umsetzung: "Fester, nicht verhandelbarer Abschnitt in CLAUDE.md"
+  claude-ai-projekte:
+    adapter_status: supported
+    umsetzung: "Fester Absatz in den Projekt-Anweisungen"
+  api:
+    adapter_status: supported
+    umsetzung: "Verpflichtender Absatz im System-Prompt"

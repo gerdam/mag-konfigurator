@@ -1,0 +1,26 @@
+id: antwortstil-quellenpflicht
+name: "Antwortstil: Quellenpflicht"
+ebene: verhalten                       # Pflicht: identitaet | verhalten | wissen | werkzeuge | leitplanken
+art: wunsch                            # wunsch | erzwungen (E6a)
+klartext_wirkung: >
+  Der Assistent nennt zu jeder Tatsachenbehauptung die Quelle und sagt
+  offen, wenn er keine hat.
+risiken:
+  - "Antworten werden länger und langsamer."
+  - "Ohne eine tatsächliche Recherchemöglichkeit bleibt die Quellenangabe
+     vage oder stützt sich auf nicht mehr aktuelles Trainingswissen."
+beziehungen:
+  benoetigt:
+    - werkzeug-websuche
+  verstaerkt: []
+  kollidiert: []
+mappings:                              # genau die 3 Oberflächen (E3)
+  claude-code:
+    adapter_status: supported          # supported | degraded | unsupported (E6c)
+    umsetzung: "Abschnitt in CLAUDE.md"
+  claude-ai-projekte:
+    adapter_status: supported
+    umsetzung: "Absatz in den Projekt-Anweisungen"
+  api:
+    adapter_status: supported
+    umsetzung: "Absatz im System-Prompt"
