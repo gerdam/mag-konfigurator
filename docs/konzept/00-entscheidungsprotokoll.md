@@ -36,6 +36,8 @@ nicht Teil dieses Konzepts.
 | E9 | Werkbank | Einrichten: find skill (Skillsuche), markitdown MCP (Formate → Markdown), OS Builder Paul (`/paul:init`), graphify recherchieren. Regel: `/Goal` nur mit explizitem Stopp-Kriterium/Token-Budget | Wunschliste 16.07.; /Goal ohne Stopp verbraucht Token grenzenlos |
 | E10 | Deployment | Railway / Vercel / gemieteter Space = Roadmap-Punkt der Prototyp-Etappe | Es gibt noch nichts zu deployen |
 | E11 | Ressource | GitHub-Repo „everything claude code" (28 Subagents, 118 Skills) als Quelle für Werkbank-Skills und Katalog-Inhalte auswerten | Fertige Bausteine statt Neuerfindung |
+| E12 | Werkzeug-Stack Prüfcode | Python 3.13 (vorhanden) + PyYAML 6 + sqlite3 + unittest, keine neuen Abhängigkeiten; PowerShell bleibt CI-Einstieg (`check-docs.ps1`) | Bordmittel statt Installationen; YAML+SQLite direkt abgedeckt (E8) |
+| E13 | Katalog-Dateistruktur | Bausteine als je eine YAML-Datei unter `katalog\bausteine\`, Profile unter `katalog\profile\`, erzeugte Artefakte unter `artefakte\<profil-id>\`; `katalog\index.sqlite` und `graph\` werden generiert und nicht versioniert | YAML versionierbar (05-Vorgabe), eine Datei je Baustein = saubere Diffs; Index ist ableitbar |
 
 ## Etappenplan
 
@@ -101,3 +103,6 @@ Siehe Roadmap in 05. Nicht Teil dieser Etappe.
   siehe [werkbank.md](../werkbank.md) (Stand 17.07.2026)
 - **Offen:** Installation „OS Builder Paul" wartet auf Michaels Bestätigung
   des recherchierten Kandidaten (Details in werkbank.md)
+- **Bauprozess beschlossen (18.07.2026):** Variante V3 samt Arbeitspaketen
+  AP1–AP4; Spec: `..\superpowers\specs\2026-07-18-bauprozess-design.md`,
+  Plan: `..\superpowers\plans\2026-07-18-bauprozess.md`
