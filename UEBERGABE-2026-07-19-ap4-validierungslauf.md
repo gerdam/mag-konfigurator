@@ -7,6 +7,16 @@ vorgänger: UEBERGABE-2026-07-18-bauprozess-ausfuehrung.md (erledigt), UEBERGABE
 
 # Übergabe 4 — AP4-Validierungslauf (19.07.2026)
 
+> **Nachtrag (19.07., selbe Session): AP4 ist vollständig abgeschlossen.**
+> Tasks 6–10 sind gebaut, reviewed („Approved") und committet; der
+> Validierungslauf ergab 0 Befunde, CI ist grün inkl. der 3 Python-Prüfungen.
+> Validierungsbericht: `docs\konzept\90-validierungsbericht-etappe-a.md`.
+> Der Plan ist damit beendet. Es folgt der **Haltepunkt (B2)**: gebündelte
+> Abnahme durch Michael (Laien-Test 01–05, Produktivtest MAG-Profil,
+> Entscheidung E14/E15: FastAPI / Cytoscape.js, Triage der notierten
+> Minor-Befunde, SDD-Abschlussreview über den ganzen Branch) — erst danach
+> GitHub-Push. Der Abschnitt „AP4-Zuschnitt" unten ist damit erledigt.
+
 ## Wo wir stehen
 
 **AP3 ist abgeschlossen:** Alle 5 Konzeptdokumente (01–05) sind geschrieben,
