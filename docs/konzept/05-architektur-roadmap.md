@@ -30,7 +30,7 @@ auf B-Tree-Basis gilt und SQLite diese Struktur fertig mitbringt, ohne
 eine Eigenimplementierung zu erfordern (Beschluss E8). Der Index bedient
 zum Beispiel die Frage-2-Logik des geführten Dialogs (04), die passende
 Bausteine zu einem Aufgabentyp findet, und ein freies Suchfeld für
-Fortgeschrittene Anwender, die gezielt einzelne Bausteine nachschlagen
+fortgeschrittene Anwender, die gezielt einzelne Bausteine nachschlagen
 wollen (01-vision.md, Abschnitt „Zielgruppen"). Ebenfalls generiert und
 nicht versioniert ist der Ordner `graph\`: Er enthält die für die
 Netzwerkansicht aufbereitete Knoten-/Kantendarstellung (siehe Abschnitt
@@ -47,11 +47,19 @@ jede Baustein- und Profil-YAML-Datei gegen das verbindliche Schema aus
 erlaubten Werte, jede in `beziehungen` referenzierte Baustein-`id`
 existiert tatsächlich als Datei, jedes `mappings`-Feld deckt genau die
 drei Zieloberflächen aus Beschluss E3 ab. Zweitens erzeugt es aus den
-geprüften Daten `katalog\index.sqlite` neu. Weil beide generierten
-Ablagen — Suchindex und Graph-Export — vollständig aus den YAML-Dateien
-ableitbar sind, ist ihr Verlust unkritisch: Ein erneuter Lauf von
-`tools\validate_katalog.py` stellt beide wieder her, ohne dass irgendwo
-Daten doppelt gepflegt werden müssten.
+geprüften Daten `katalog\index.sqlite` neu.
+
+**Geplanter Graph-Erzeuger:** Der Ordner `graph\` wird nicht von
+`tools\validate_katalog.py` erzeugt, sondern von einem eigenen, ebenfalls
+noch nicht vorhandenen Werkzeug `tools\graph_export.py` (Task 8 im
+laufenden Bauprozess) — auch dieses hier als geplant zu verstehen, nicht
+als vorhanden. Suchindex und Graph-Export sind damit zwei getrennte,
+generierte Ablagen mit zwei getrennten Erzeuger-Werkzeugen, beide aber
+vollständig aus denselben YAML-Dateien ableitbar. Ihr Verlust ist deshalb
+unkritisch: Ein erneuter Lauf von `tools\validate_katalog.py` stellt den
+Suchindex `katalog\index.sqlite` wieder her, ein erneuter Lauf von
+`tools\graph_export.py` den Graph-Export im Ordner `graph\` — ohne dass
+irgendwo Daten doppelt gepflegt werden müssten.
 
 ## Tech-Stack-Empfehlung
 
