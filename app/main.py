@@ -16,6 +16,8 @@ sys.path.insert(0, str(REPO / "tools"))
 from graph_export import exportiere  # noqa: E402
 from validate_katalog import lade_bausteine, pruefe_beziehungen  # noqa: E402
 
+from app.auswahl import finde_konflikte, mit_pflichtnachzug  # noqa: E402
+
 
 def lade_katalog():
     bausteine, befunde = lade_bausteine(REPO / "katalog" / "bausteine")
@@ -48,3 +50,13 @@ def profil(profil_id: str):
     if profil_id not in PROFILE:
         raise HTTPException(404, f"Profil '{profil_id}' unbekannt")
     return PROFILE[profil_id]
+
+
+@app.post("/api/auswahl/pruefen")
+def auswahl_pruefen(daten: dict):
+    gewaehlt = daten.get("bausteine") or []
+    unbekannt = [b for b in gewaehlt if b not in BAUSTEINE]
+    if unbekannt:
+        raise HTTPException(400, f"Unbekannte Bausteine: {', '.join(unbekannt)}")
+    voll = mit_pflichtnachzug(BAUSTEINE, gewaehlt)
+    return {"bausteine": voll, "konflikte": finde_konflikte(BAUSTEINE, voll)}
