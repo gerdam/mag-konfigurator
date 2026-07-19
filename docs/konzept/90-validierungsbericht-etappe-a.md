@@ -87,13 +87,13 @@ Bewertung der fünf Abnahmekriterien für Etappe A aus
 |---|---|---|
 | Konsistenz | erfüllt | 04↔02 (das vom Kriterium konkret geforderte Paar): `04-bedienkonzept.md` verwendet ausschließlich Baustein-IDs, `ebene`-Werte und Beziehungstypen (`benoetigt`/`verstaerkt`/`kollidiert`), die exakt aus 02 und dem Katalog stammen — im Task-4-Review gegen die YAML-Dateien verifiziert, keine Abweichung gefunden. Zusätzlich bestätigen die maschinellen Prüfläufe die Katalog-Konsistenz: `validate_katalog` prüft jede der 5 Baustein-YAMLs gegen das Schema aus 02 — 0 Befunde; `check_profil` prüft das Referenzprofil aus 03 gegen Katalog und Artefakte — 0 Befunde. Die während AP3 in den Task-Reviews gefundenen zwei Befunde waren jeweils dokumentinterne Korrekturen (Task 4 innerhalb von 04, Task 5 innerhalb von 05, kein Widerspruch zwischen zwei Dokumenten — siehe Abschnitt „Korrekturen") und vor AP4 behoben |
 | Laien-Test | entfällt (19.07.2026) | Michael hat am Haltepunkt entschieden, auf den Laien-Test zu verzichten (protokolliert in `00-entscheidungsprotokoll.md`, Abschnitte „Abnahmekriterien" und „Notizen"); die Abnahme stützt sich auf die übrigen vier Kriterien |
-| Tragfähigkeit | wartet auf Michael | Alle vier Artefakte für die MAG-Rechercheassistenz existieren, sind vollständig und maschinell geprüft (`check_profil`: 1 Profil gültig, keine fehlenden Artefakte, keine Kollision); der produktive Einsatz im Arbeitsalltag steht noch aus und gehört zum Haltepunkt (B2) |
+| Tragfähigkeit | erfüllt (19.07.2026) | Alle vier Artefakte für die MAG-Rechercheassistenz existieren, sind vollständig und maschinell geprüft (`check_profil`: 1 Profil gültig, keine fehlenden Artefakte, keine Kollision); Michael hat das Profil am 19.07.2026 produktiv eingesetzt und die Tragfähigkeit im Rahmen der Haltepunkt-Abnahme (B2) bestätigt |
 | Graph-Tauglichkeit | erfüllt | `graph_export` liefert 5 Knoten und 5 Kanten aus den realen Katalogdaten — exakt deckungsgleich mit der Stichprobe in `05-architektur-roadmap.md` |
 | CI | erfüllt | `check-docs.ps1` läuft fehlerfrei über alle 13 geprüften Dateien inkl. der drei Python-Prüfungen (Exit 0); die Gegenprobe aus Task 9 belegt, dass echte Fehler auch tatsächlich erkannt werden |
 
-Kurzfassung: 3 von 5 Kriterien erfüllt, 1 entfällt per Beschluss vom
-19.07.2026 (Laien-Test), 1 wartet auf Michael (Tragfähigkeit — nur
-vorbereitbar, nicht durch einen Prüflauf ersetzbar).
+Kurzfassung: 4 von 5 Kriterien erfüllt, 1 entfällt per Beschluss vom
+19.07.2026 (Laien-Test) — die Abnahme-Grundlage der Etappe A ist damit
+vollständig.
 
 ## Offen für den Haltepunkt
 
@@ -105,8 +105,9 @@ gehören zur gebündelten Abnahme am Haltepunkt vor dem GitHub-Push (B2):
   oben).
 - **Produktiveinsatz der MAG-Rechercheassistenz** im Arbeitsalltag, mit den
   Artefakten unter `artefakte\mag-rechercheassistenz\` (Abnahmekriterium
-  „Tragfähigkeit", siehe oben); eine Einsatz-Anleitung liegt seit dem
-  19.07.2026 unter `artefakte\mag-rechercheassistenz\anleitung.md`.
+  „Tragfähigkeit", siehe oben) — erledigt: von Michael am 19.07.2026
+  bestätigt; eine Einsatz-Anleitung liegt seit dem 19.07.2026 unter
+  `artefakte\mag-rechercheassistenz\anleitung.md`.
 - **Zwei zunächst offene, als Empfehlung markierte Vorschläge** aus
   `05-architektur-roadmap.md` — am 19.07.2026 von Michael beschlossen und
   als **E14** (Backend Python/FastAPI) und **E15** (Graph-Rendering
@@ -121,10 +122,10 @@ gehören zur gebündelten Abnahme am Haltepunkt vor dem GitHub-Push (B2):
     `03-profilkatalog.md`, obwohl der Inhalt dem Beschluss nicht
     widerspricht.
   - Die Baustein-Reihenfolge in `katalog\profile\mag-rechercheassistenz.yaml`
-    (`rolle`, `antwortstil`, `leitplanke`, `werkzeug`) weicht kosmetisch von
-    der Reihenfolge in der Tabelle in `03-profilkatalog.md` (`rolle`,
-    `antwortstil`, `werkzeug`, `leitplanke`) ab — inhaltlich ohne
-    Auswirkung, da beide dieselben vier Bausteine enthalten.
+    (`rolle`, `antwortstil`, `leitplanke`, `werkzeug`) wich kosmetisch von
+    der Reihenfolge in der Tabelle in `03-profilkatalog.md` ab — im Zuge
+    des Abschluss-Reviews am 19.07.2026 angeglichen, die Tabelle folgt
+    jetzt der YAML-Reihenfolge.
   - Der Begriff „B-Tree" wird in `05-architektur-roadmap.md` (Beschluss E8)
     verwendet, aber im Dokument selbst nicht erklärt.
   - Die Zuordnung von graphify zu den Beschlüssen E9/E11 in
