@@ -56,7 +56,17 @@ Baustein `werkzeug-websuche` (Ebene Werkzeuge) nach sich zieht.
 „Ausschließlich mit Unterlagen arbeiten, die ich selbst bereitstelle"
 führt stattdessen zum Baustein `wissen-nur-freigegebene-quellen` (Ebene
 Wissen) — der laut Katalog mit `werkzeug-websuche` `kollidiert` und daher
-mit der ersten Antwortoption nicht gemeinsam gewählt werden kann.
+mit der ersten Antwortoption nicht gemeinsam gewählt werden kann. „Nur
+vorhandenes Wissen zusammenfassen, ohne aktiv zu recherchieren" fügt
+bewusst *keinen* Baustein der Ebenen Wissen oder Werkzeuge hinzu —
+insbesondere wird `werkzeug-websuche` nicht ausgewählt. Da
+`antwortstil-quellenpflicht` laut Katalog `werkzeug-websuche` `benoetigt`
+(eine verlässliche Quellenangabe setzt voraus, dass tatsächlich recherchiert
+werden kann, siehe 02-taxonomie.md, Abschnitt „Kombinierbarkeit und
+Konflikte"), bleibt bei dieser dritten Antwort auch der
+Verhaltens-Baustein `antwortstil-quellenpflicht` unausgewählt: Das Profil
+verzichtet an dieser Stelle bewusst auf eine Quellenpflicht, statt eine
+Recherchemöglichkeit vorzutäuschen, die nicht genutzt werden soll.
 
 ### Frage 3: Risikoprofil/Autonomie
 
@@ -141,7 +151,9 @@ Typen auch ohne Legende auseinanderzuhalten sind:
   vorausgesetzte Baustein nicht ausgewählt, kann der voraussetzende
   Baustein gar nicht erst aktiviert werden.
 - **`verstaerkt` (Empfehlung):** gestrichelte Linie in hellem Blaugrau,
-  ohne Pfeilspitze, als Hinweis auf einen gut passenden, aber nicht
+  vom empfehlenden zum empfohlenen Baustein (analog zur Richtung bei
+  `benoetigt`, aber ohne Pfeilspitze dargestellt, weil die Empfehlung
+  nicht zwingend ist), als Hinweis auf einen gut passenden, aber nicht
   zwingenden Baustein.
 - **`kollidiert` (harte Warnung):** durchgezogene, kräftig rote Linie mit
   Warnsymbol. Diese Kante wird nur dann sichtbar hervorgehoben, wenn
