@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konfigurator-Prototyp</title>
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+<header>
+  <h1>Konfigurator — Prototyp (Etappe B)</h1>
+  <p>Kuratierter Vorschlag per geführtem Dialog, prüfbar und veränderbar in
+  der Netzwerkansicht. Kein Ergebnis ist eine „beste" Lösung — alles bleibt
+  ein kuratierter Vorschlag zur eigenen Entscheidung.</p>
+</header>
+<main>
+  <section id="graph-bereich">
+    <h2>Netzwerkansicht</h2>
+    <p>Knotenfarbe = Wirkungsebene (Blau Identität, Grün Verhalten, Gelb
+    Wissen, Orange Werkzeuge, Rot Leitplanken). Kräftige Knoten sind
+    ausgewählt, blasse nicht. Klick auf einen Knoten wählt den Baustein zu
+    oder ab.</p>
+    <div id="cy"></div>
+    <div id="hinweis-bereich" hidden>
+      <p id="hinweis-text"></p>
+      <button id="hinweis-bestaetigen" type="button">Abwahl bestätigen</button>
+      <button id="hinweis-abbrechen" type="button">Abbrechen</button>
+    </div>
+    <div id="konflikt-bereich" hidden>
+      <p id="konflikt-text"></p>
+    </div>
+    <p id="auswahl-anzeige"></p>
+  </section>
+</main>
+<script src="cytoscape.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

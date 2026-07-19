@@ -40,6 +40,7 @@ nicht Teil dieses Konzepts.
 | E13 | Katalog-Dateistruktur | Bausteine als je eine YAML-Datei unter `katalog\bausteine\`, Profile unter `katalog\profile\`, erzeugte Artefakte unter `artefakte\<profil-id>\`; `katalog\index.sqlite` und `graph\` werden generiert und nicht versioniert | YAML versionierbar (05-Vorgabe), eine Datei je Baustein = saubere Diffs; Index ist ableitbar |
 | E14 | Backend Prototyp | Web-App-Backend des Prototyps (Etappe B) in Python 3.13 + FastAPI | Von Michael am 19.07.2026 beschlossen (Empfehlung aus 05); bleibt beim vorhandenen Python-Stack (E12), keine neue Sprache im Projekt |
 | E15 | Graph-Rendering | Die Netzwerkansicht rendert mit Cytoscape.js (statt D3) | Von Michael am 19.07.2026 beschlossen (Empfehlung aus 05); graphspezifische Bibliothek reduziert Eigenbau für Knoten, Kanten und Interaktion |
+| E16 | Cytoscape-Einbindung | Cytoscape.js (Version 3.30.2) liegt als lokale Datei `app\static\cytoscape.min.js` im Repo — kein npm, kein Build-Werkzeug, kein CDN zur Laufzeit | Prototyp bleibt ohne Werkzeugkette lauffähig und offline nutzbar; eine Datei ist versionierbar und nachvollziehbar |
 
 ## Etappenplan
 

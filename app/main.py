@@ -9,6 +9,7 @@ from pathlib import Path
 
 import yaml
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "tools"))
@@ -76,3 +77,7 @@ def dialog_auswerten(antworten: dict):
     except ValueError as fehler:
         raise HTTPException(400, str(fehler))
     return {"bausteine": auswahl, "konflikte": konflikte}
+
+
+app.mount("/", StaticFiles(directory=Path(__file__).resolve().parent / "static",
+                           html=True), name="static")

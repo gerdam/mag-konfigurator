@@ -43,6 +43,14 @@ class TestApi(unittest.TestCase):
     def test_unbekanntes_profil_404(self):
         self.assertEqual(self.client.get("/api/profil/gibt-es-nicht").status_code, 404)
 
+    def test_startseite_wird_ausgeliefert(self):
+        antwort = self.client.get("/")
+        self.assertEqual(antwort.status_code, 200)
+        self.assertIn("Netzwerkansicht", antwort.text)
+
+    def test_cytoscape_bibliothek_wird_ausgeliefert(self):
+        self.assertEqual(self.client.get("/cytoscape.min.js").status_code, 200)
+
 
 if __name__ == "__main__":
     unittest.main()
