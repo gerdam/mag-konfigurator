@@ -1,0 +1,50 @@
+"""FastAPI-Backend des Konfigurator-Prototyps (AP5, Beschluss E14).
+
+Liest den YAML-Katalog ueber die bestehenden Pruefwerkzeuge (tools/) und
+stellt die Routen fuer Graph, Profile, Auswahl, Dialog und Export bereit.
+Start (Entwicklung): python -m uvicorn app.main:app --reload
+"""
+import sys
+from pathlib import Path
+
+import yaml
+from fastapi import FastAPI, HTTPException
+
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "tools"))
+
+from graph_export import exportiere  # noqa: E402
+from validate_katalog import lade_bausteine, pruefe_beziehungen  # noqa: E402
+
+
+def lade_katalog():
+    bausteine, befunde = lade_bausteine(REPO / "katalog" / "bausteine")
+    befunde += pruefe_beziehungen(bausteine)
+    if befunde:
+        raise RuntimeError("Katalog hat Befunde: " + "; ".join(befunde))
+    return bausteine
+
+
+def lade_profile():
+    profile = {}
+    for pfad in sorted((REPO / "katalog" / "profile").glob("*.yaml")):
+        daten = yaml.safe_load(pfad.read_text(encoding="utf-8"))
+        profile[daten["id"]] = daten
+    return profile
+
+
+app = FastAPI(title="Konfigurator-Prototyp")
+BAUSTEINE = lade_katalog()
+PROFILE = lade_profile()
+
+
+@app.get("/api/graph")
+def graph():
+    return exportiere(BAUSTEINE)
+
+
+@app.get("/api/profil/{profil_id}")
+def profil(profil_id: str):
+    if profil_id not in PROFILE:
+        raise HTTPException(404, f"Profil '{profil_id}' unbekannt")
+    return PROFILE[profil_id]
