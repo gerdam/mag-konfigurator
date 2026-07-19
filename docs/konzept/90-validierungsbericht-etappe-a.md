@@ -72,8 +72,8 @@ behoben wurden:
 
 | Task | Befund | Geänderte Datei | Fix-Commit |
 |---|---|---|---|
-| Task 4 (04-bedienkonzept) | Fehlende Wirkungs-Angabe bei einer Antwortoption im geführten Dialog | `docs\konzept\04-bedienkonzept.md` | `26b108b` — "AP3: 04-bedienkonzept Review-Fix" |
-| Task 5 (05-architektur-roadmap) | Widerspruch zwischen den in `validate_katalog` und `graph_export` beschriebenen Zuständigkeiten | `docs\konzept\05-architektur-roadmap.md` | `c82ed94` — "AP3: 05-architektur-roadmap Review-Fix" |
+| Task 4 (04-bedienkonzept) | Fehlende Wirkungs-Angabe bei einer Antwortoption im geführten Dialog | `docs\konzept\04-bedienkonzept.md` | `26bf58b` — "AP3: 04-bedienkonzept Review-Fix" |
+| Task 5 (05-architektur-roadmap) | Widerspruch zwischen den in `validate_katalog` und `graph_export` beschriebenen Zuständigkeiten | `docs\konzept\05-architektur-roadmap.md` | `cb1e98a` — "AP3: 05-architektur-roadmap Review-Fix" |
 
 Beide Fixes liegen vor AP4 und sind bereits Teil des Stands, gegen den der
 Validierungslauf oben lief.
