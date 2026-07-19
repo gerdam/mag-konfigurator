@@ -71,6 +71,18 @@ foreach ($datei in $dateien) {
     }
 }
 
+# 5. Katalog-Pruefungen (AP4, Beschluss B5/V3): nur wenn Katalog + Python vorhanden
+$katalog = Join-Path $repoRoot 'katalog\bausteine'
+if ((Test-Path $katalog) -and (Get-Command python -ErrorAction SilentlyContinue)) {
+    foreach ($skript in @('tools\validate_katalog.py', 'tools\check_profil.py', 'tools\graph_export.py')) {
+        $pfad = Join-Path $repoRoot $skript
+        if (Test-Path $pfad) {
+            & python $pfad | Out-Null
+            if ($LASTEXITCODE -ne 0) { $befunde.Add("$skript : Befunde (erneut direkt aufrufen fuer Details)") }
+        }
+    }
+}
+
 Write-Host ("check-docs: {0} Datei(en) geprueft." -f $dateien.Count)
 if ($befunde.Count -gt 0) {
     Write-Host "BEFUNDE:" -ForegroundColor Red
