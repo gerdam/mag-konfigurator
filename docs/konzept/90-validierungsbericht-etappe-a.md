@@ -85,7 +85,7 @@ Bewertung der fünf Abnahmekriterien für Etappe A aus
 
 | Kriterium | Status | Nachweis |
 |---|---|---|
-| Konsistenz | erfüllt | `validate_katalog` prüft jede der 5 Baustein-YAMLs gegen das Schema aus 02 (Pflichtfelder, gültige `ebene`, aufgelöste `beziehungen`) — 0 Befunde; `check_profil` prüft das Referenzprofil aus 03 gegen Katalog und Artefakte — 0 Befunde; `check-docs.ps1` findet keine toten Verweise zwischen den Dokumenten. Der einzige während AP3 gefundene Widerspruch (04/05, siehe Abschnitt „Korrekturen") ist behoben |
+| Konsistenz | erfüllt | 04↔02 (das vom Kriterium konkret geforderte Paar): `04-bedienkonzept.md` verwendet ausschließlich Baustein-IDs, `ebene`-Werte und Beziehungstypen (`benoetigt`/`verstaerkt`/`kollidiert`), die exakt aus 02 und dem Katalog stammen — im Task-4-Review gegen die YAML-Dateien verifiziert, keine Abweichung gefunden. Zusätzlich bestätigen die maschinellen Prüfläufe die Katalog-Konsistenz: `validate_katalog` prüft jede der 5 Baustein-YAMLs gegen das Schema aus 02 — 0 Befunde; `check_profil` prüft das Referenzprofil aus 03 gegen Katalog und Artefakte — 0 Befunde. Die während AP3 in den Task-Reviews gefundenen zwei Befunde waren jeweils dokumentinterne Korrekturen (Task 4 innerhalb von 04, Task 5 innerhalb von 05, kein Widerspruch zwischen zwei Dokumenten — siehe Abschnitt „Korrekturen") und vor AP4 behoben |
 | Laien-Test | wartet auf Michael | Dokumente 01–05 sind vollständig und liegen zur Gegenlese vor; das eigentliche Gegenlesen ohne KI-Vorwissen ist nur durch Michael möglich und Teil der gebündelten Abnahme am Haltepunkt (B2) |
 | Tragfähigkeit | wartet auf Michael | Alle vier Artefakte für die MAG-Rechercheassistenz existieren, sind vollständig und maschinell geprüft (`check_profil`: 1 Profil gültig, keine fehlenden Artefakte, keine Kollision); der produktive Einsatz im Arbeitsalltag steht noch aus und gehört zum Haltepunkt (B2) |
 | Graph-Tauglichkeit | erfüllt | `graph_export` liefert 5 Knoten und 5 Kanten aus den realen Katalogdaten — exakt deckungsgleich mit der Stichprobe in `05-architektur-roadmap.md` |
@@ -152,8 +152,9 @@ Stopp-Kriterium/Token-Budget (Beschluss E9, B3):
    Stopp-Kriterium: Der Dialog erzeugt für die MAG-Rechercheassistenz-
    Eingaben exakt das bestehende Profil
    `katalog\profile\mag-rechercheassistenz.yaml`.
-3. **Netzwerkansicht.** Cytoscape.js-Integration (siehe offene Empfehlung
-   oben), die den Graph-Export rendert: Einfärbung nach Wirkungsebene,
+3. **Netzwerkansicht.** Integration einer Graph-Rendering-Bibliothek
+   (Kandidat: Cytoscape.js, siehe offene Empfehlung oben), die den
+   Graph-Export rendert: Einfärbung nach Wirkungsebene,
    Kantendarstellung nach Beziehungstyp, Zu-/Abwahl mit Kollisions-Warnung.
    Stopp-Kriterium: Alle 5 Knoten und 5 Kanten aus der Etappe-A-Stichprobe
    sind interaktiv sichtbar; das `kollidiert`-Paar
