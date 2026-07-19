@@ -16,8 +16,8 @@ und besteht aus vier Bausteinen — je einem pro betroffener Wirkungsebene:
 |---|---|---|
 | `rolle-rechercheassistent` | Identität | [katalog\bausteine\rolle-rechercheassistent.yaml](../../katalog/bausteine/rolle-rechercheassistent.yaml) |
 | `antwortstil-quellenpflicht` | Verhalten | [katalog\bausteine\antwortstil-quellenpflicht.yaml](../../katalog/bausteine/antwortstil-quellenpflicht.yaml) |
-| `werkzeug-websuche` | Werkzeuge | [katalog\bausteine\werkzeug-websuche.yaml](../../katalog/bausteine/werkzeug-websuche.yaml) |
 | `leitplanke-keine-rechtsberatung` | Leitplanken | [katalog\bausteine\leitplanke-keine-rechtsberatung.yaml](../../katalog/bausteine/leitplanke-keine-rechtsberatung.yaml) |
+| `werkzeug-websuche` | Werkzeuge | [katalog\bausteine\werkzeug-websuche.yaml](../../katalog/bausteine/werkzeug-websuche.yaml) |
 
 ### Warum `werkzeug-websuche` und nicht `wissen-nur-freigegebene-quellen`
 

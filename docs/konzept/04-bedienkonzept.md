@@ -161,7 +161,10 @@ Typen auch ohne Legende auseinanderzuhalten sind:
   bleibt sie unauffällig, damit die Ansicht nicht überladen wirkt.
 
 Beispielhaft für die fünf Bausteine des Katalogs ergibt sich folgende
-Knoten-/Kantenliste (Stichprobe zur Prüfung der Graph-Tauglichkeit):
+Knoten-/Kantenliste (Stichprobe zur Prüfung der Graph-Tauglichkeit); die
+symmetrische `kollidiert`-Beziehung ist hier verkürzt als eine Zeile
+aufgeführt, im Graph-Export zählt sie als zwei gerichtete Kanten (daher
+dort 5 Kanten, siehe 05-architektur-roadmap.md):
 
 | Kante (von → nach)                                                    | Beziehungstyp |
 |-------------------------------------------------------------------------|---------------|

@@ -1,2 +1,4 @@
 katalog/index.sqlite
 graph/
+__pycache__/
+*.pyc
