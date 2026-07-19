@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pruefungen:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Abhaengigkeiten installieren
+        run: pip install -r requirements.txt
+      - name: Python-Tests
+        run: python -m unittest discover -s tools/tests -v
+      - name: Dokument- und Katalogpruefung
+        run: powershell -File tools\check-docs.ps1

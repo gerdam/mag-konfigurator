@@ -98,7 +98,9 @@ Siehe Roadmap in 05. Nicht Teil dieser Etappe.
   Evaluation existiert (E6b)
 - UTF-8-Pflicht; jede neue Datei nach dem Schreiben erneut einlesen
   (bekannte Kodierungsfehler-Historie); der pre-commit-Hook prüft zusätzlich
-- Git: nur lokal, kein Push (bis E7-Umzug); Commits je abgeschlossenem Schritt
+- Git: Remote ist seit 19.07.2026 das öffentliche GitHub-Repo
+  `gerdam/mag-konfigurator` (E7-Umzug vollzogen); Commits je abgeschlossenem
+  Schritt, Push je Task — GitHub Actions prüft jeden Push
 - `/Goal` nur mit explizitem Stopp-Kriterium/Token-Budget (E9)
 
 ## Notizen / offene Punkte
@@ -114,3 +116,7 @@ Siehe Roadmap in 05. Nicht Teil dieser Etappe.
   Tabelle); Abnahmekriterium „Laien-Test" entfällt auf Michaels Entscheidung;
   für den Produktivtest des MAG-Profils liegt eine Einsatz-Anleitung unter
   `..\..\artefakte\mag-rechercheassistenz\anleitung.md`
+- **E7-Umzug vollzogen (19.07.2026):** GitHub-Remote eingerichtet, Historie
+  zuvor um 6 Dateien mit privaten Pfaden bereinigt; GitHub Actions führt
+  `tools\check-docs.ps1` und die Python-Tests bei jedem Push aus
+  (`.github/workflows/ci.yml`).
