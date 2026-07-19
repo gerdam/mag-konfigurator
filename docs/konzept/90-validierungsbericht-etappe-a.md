@@ -86,12 +86,13 @@ Bewertung der fünf Abnahmekriterien für Etappe A aus
 | Kriterium | Status | Nachweis |
 |---|---|---|
 | Konsistenz | erfüllt | 04↔02 (das vom Kriterium konkret geforderte Paar): `04-bedienkonzept.md` verwendet ausschließlich Baustein-IDs, `ebene`-Werte und Beziehungstypen (`benoetigt`/`verstaerkt`/`kollidiert`), die exakt aus 02 und dem Katalog stammen — im Task-4-Review gegen die YAML-Dateien verifiziert, keine Abweichung gefunden. Zusätzlich bestätigen die maschinellen Prüfläufe die Katalog-Konsistenz: `validate_katalog` prüft jede der 5 Baustein-YAMLs gegen das Schema aus 02 — 0 Befunde; `check_profil` prüft das Referenzprofil aus 03 gegen Katalog und Artefakte — 0 Befunde. Die während AP3 in den Task-Reviews gefundenen zwei Befunde waren jeweils dokumentinterne Korrekturen (Task 4 innerhalb von 04, Task 5 innerhalb von 05, kein Widerspruch zwischen zwei Dokumenten — siehe Abschnitt „Korrekturen") und vor AP4 behoben |
-| Laien-Test | wartet auf Michael | Dokumente 01–05 sind vollständig und liegen zur Gegenlese vor; das eigentliche Gegenlesen ohne KI-Vorwissen ist nur durch Michael möglich und Teil der gebündelten Abnahme am Haltepunkt (B2) |
+| Laien-Test | entfällt (19.07.2026) | Michael hat am Haltepunkt entschieden, auf den Laien-Test zu verzichten (protokolliert in `00-entscheidungsprotokoll.md`, Abschnitte „Abnahmekriterien" und „Notizen"); die Abnahme stützt sich auf die übrigen vier Kriterien |
 | Tragfähigkeit | wartet auf Michael | Alle vier Artefakte für die MAG-Rechercheassistenz existieren, sind vollständig und maschinell geprüft (`check_profil`: 1 Profil gültig, keine fehlenden Artefakte, keine Kollision); der produktive Einsatz im Arbeitsalltag steht noch aus und gehört zum Haltepunkt (B2) |
 | Graph-Tauglichkeit | erfüllt | `graph_export` liefert 5 Knoten und 5 Kanten aus den realen Katalogdaten — exakt deckungsgleich mit der Stichprobe in `05-architektur-roadmap.md` |
 | CI | erfüllt | `check-docs.ps1` läuft fehlerfrei über alle 13 geprüften Dateien inkl. der drei Python-Prüfungen (Exit 0); die Gegenprobe aus Task 9 belegt, dass echte Fehler auch tatsächlich erkannt werden |
 
-Kurzfassung: 3 von 5 Kriterien erfüllt, 2 warten auf Michael (beide nur
+Kurzfassung: 3 von 5 Kriterien erfüllt, 1 entfällt per Beschluss vom
+19.07.2026 (Laien-Test), 1 wartet auf Michael (Tragfähigkeit — nur
 vorbereitbar, nicht durch einen Prüflauf ersetzbar).
 
 ## Offen für den Haltepunkt
@@ -99,18 +100,17 @@ vorbereitbar, nicht durch einen Prüflauf ersetzbar).
 Folgende Punkte sind bewusst nicht Teil dieses Validierungslaufs, sondern
 gehören zur gebündelten Abnahme am Haltepunkt vor dem GitHub-Push (B2):
 
-- **Laien-Test der Dokumente 01–05** durch Michael (Abnahmekriterium
-  „Laien-Test", siehe oben).
+- **Laien-Test der Dokumente 01–05** — erledigt durch Beschluss: entfällt
+  seit dem 19.07.2026 auf Michaels Entscheidung (siehe Abnahmekriterien
+  oben).
 - **Produktiveinsatz der MAG-Rechercheassistenz** im Arbeitsalltag, mit den
   Artefakten unter `artefakte\mag-rechercheassistenz\` (Abnahmekriterium
-  „Tragfähigkeit", siehe oben).
-- **Zwei offene, als Empfehlung markierte Vorschläge** aus
-  `05-architektur-roadmap.md`, die über die Beschlüsse E1–E13 hinausgehen
-  und noch keine eigene E-Nummer haben — hier wird keine E-Nummer
-  eigenmächtig vergeben, das Entscheidungsprotokoll bleibt unverändert:
-  - Backend-Framework Python/FastAPI (Abschnitt „Tech-Stack-Empfehlung").
-  - Graph-Rendering-Bibliothek Cytoscape.js (Abschnitt
-    „Tech-Stack-Empfehlung").
+  „Tragfähigkeit", siehe oben); eine Einsatz-Anleitung liegt seit dem
+  19.07.2026 unter `artefakte\mag-rechercheassistenz\anleitung.md`.
+- **Zwei zunächst offene, als Empfehlung markierte Vorschläge** aus
+  `05-architektur-roadmap.md` — am 19.07.2026 von Michael beschlossen und
+  als **E14** (Backend Python/FastAPI) und **E15** (Graph-Rendering
+  Cytoscape.js) ins Entscheidungsprotokoll fortgeschrieben.
 - **Notierte Minor-Befunde** aus dem Abschluss-Review, ohne Auswirkung auf
   die Abnahmekriterien, zur Kenntnisnahme für ein späteres Redaktions-Update:
   - `01-vision.md` nennt im Abschnitt „Was der Konfigurator nicht ist" zwei

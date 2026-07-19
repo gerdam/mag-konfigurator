@@ -21,7 +21,7 @@ Die Idee, **zwei KI-Systeme zu koppeln** (Trialog/Dual-Layer), ist seit dem
 17.07.2026 ein **eigenes Produkt** und lebt in `..\..\Dual-layer\`. Sie ist
 nicht Teil dieses Konzepts.
 
-## Beschlüsse vom 17.07.2026 (nicht neu aufrollen)
+## Beschlüsse (Stand 17.07.2026, fortgeschrieben — nicht neu aufrollen)
 
 | # | Thema | Beschluss | Begründung |
 |---|---|---|---|
@@ -38,6 +38,8 @@ nicht Teil dieses Konzepts.
 | E11 | Ressource | GitHub-Repo „everything claude code" (28 Subagents, 118 Skills) als Quelle für Werkbank-Skills und Katalog-Inhalte auswerten | Fertige Bausteine statt Neuerfindung |
 | E12 | Werkzeug-Stack Prüfcode | Python 3.13 (vorhanden) + PyYAML 6 + sqlite3 + unittest, keine neuen Abhängigkeiten; PowerShell bleibt CI-Einstieg (`check-docs.ps1`) | Bordmittel statt Installationen; YAML+SQLite direkt abgedeckt (E8) |
 | E13 | Katalog-Dateistruktur | Bausteine als je eine YAML-Datei unter `katalog\bausteine\`, Profile unter `katalog\profile\`, erzeugte Artefakte unter `artefakte\<profil-id>\`; `katalog\index.sqlite` und `graph\` werden generiert und nicht versioniert | YAML versionierbar (05-Vorgabe), eine Datei je Baustein = saubere Diffs; Index ist ableitbar |
+| E14 | Backend Prototyp | Web-App-Backend des Prototyps (Etappe B) in Python 3.13 + FastAPI | Von Michael am 19.07.2026 beschlossen (Empfehlung aus 05); bleibt beim vorhandenen Python-Stack (E12), keine neue Sprache im Projekt |
+| E15 | Graph-Rendering | Die Netzwerkansicht rendert mit Cytoscape.js (statt D3) | Von Michael am 19.07.2026 beschlossen (Empfehlung aus 05); graphspezifische Bibliothek reduziert Eigenbau für Knoten, Kanten und Interaktion |
 
 ## Etappenplan
 
@@ -80,7 +82,9 @@ Siehe Roadmap in 05. Nicht Teil dieser Etappe.
 - **Konsistenz:** Jedes in 03 verwendete Baustein-Attribut existiert im
   Schema von 02; keine Widersprüche zwischen 04 und 02
 - **Laien-Test:** Baustein- und Profilbeschreibungen ohne KI-Vorwissen
-  verständlich (Michael liest gegen)
+  verständlich (Michael liest gegen) — **entfällt** per Beschluss von Michael
+  am 19.07.2026 (siehe Notizen); die Abnahme stützt sich auf die übrigen
+  vier Kriterien
 - **Tragfähigkeit:** Das Referenzprofil erzeugt für alle 3 Oberflächen ein
   vollständiges, real einsetzbares Artefakt — Michael setzt die
   MAG-Rechercheassistenz produktiv ein
@@ -106,3 +110,7 @@ Siehe Roadmap in 05. Nicht Teil dieser Etappe.
 - **Bauprozess beschlossen (18.07.2026):** Variante V3 samt Arbeitspaketen
   AP1–AP4; Spec: `..\superpowers\specs\2026-07-18-bauprozess-design.md`,
   Plan: `..\superpowers\plans\2026-07-18-bauprozess.md`
+- **Haltepunkt-Entscheidungen (19.07.2026):** E14/E15 beschlossen (siehe
+  Tabelle); Abnahmekriterium „Laien-Test" entfällt auf Michaels Entscheidung;
+  für den Produktivtest des MAG-Profils liegt eine Einsatz-Anleitung unter
+  `..\..\artefakte\mag-rechercheassistenz\anleitung.md`
