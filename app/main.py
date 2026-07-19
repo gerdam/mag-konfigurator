@@ -18,6 +18,8 @@ from validate_katalog import lade_bausteine, pruefe_beziehungen  # noqa: E402
 
 from app.auswahl import finde_konflikte, mit_pflichtnachzug  # noqa: E402
 
+from app.dialog import lade_fragen, werte_aus  # noqa: E402
+
 
 def lade_katalog():
     bausteine, befunde = lade_bausteine(REPO / "katalog" / "bausteine")
@@ -60,3 +62,17 @@ def auswahl_pruefen(daten: dict):
         raise HTTPException(400, f"Unbekannte Bausteine: {', '.join(unbekannt)}")
     voll = mit_pflichtnachzug(BAUSTEINE, gewaehlt)
     return {"bausteine": voll, "konflikte": finde_konflikte(BAUSTEINE, voll)}
+
+
+@app.get("/api/dialog")
+def dialog_fragen():
+    return lade_fragen()
+
+
+@app.post("/api/dialog")
+def dialog_auswerten(antworten: dict):
+    try:
+        auswahl, konflikte = werte_aus(BAUSTEINE, antworten)
+    except ValueError as fehler:
+        raise HTTPException(400, str(fehler))
+    return {"bausteine": auswahl, "konflikte": konflikte}

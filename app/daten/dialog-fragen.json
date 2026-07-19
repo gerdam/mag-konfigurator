@@ -1,0 +1,47 @@
+[
+  {
+    "id": "domaene",
+    "text": "In welchem Bereich soll dich der Assistent unterstützen?",
+    "optionen": [
+      {"id": "recherche", "text": "Recherche & Informationsbeschaffung",
+       "bausteine": ["rolle-rechercheassistent"]},
+      {"id": "finanzen", "text": "Finanzen & Kennzahlen", "bausteine": [],
+       "verfuegbar": false,
+       "hinweis": "In dieser Ausbaustufe nur als Steckbrief im Profilkatalog (03) vorhanden."},
+      {"id": "uebersetzung", "text": "Übersetzung von Fachtexten", "bausteine": [],
+       "verfuegbar": false,
+       "hinweis": "In dieser Ausbaustufe nur als Steckbrief im Profilkatalog (03) vorhanden."},
+      {"id": "texte", "text": "Überarbeitung vorhandener Texte", "bausteine": [],
+       "verfuegbar": false,
+       "hinweis": "In dieser Ausbaustufe nur als Steckbrief im Profilkatalog (03) vorhanden."},
+      {"id": "recht", "text": "Rechtliche Informationen", "bausteine": [],
+       "verfuegbar": false,
+       "hinweis": "In dieser Ausbaustufe nur als Steckbrief im Profilkatalog (03) vorhanden."},
+      {"id": "software", "text": "Softwareentwicklung", "bausteine": [],
+       "verfuegbar": false,
+       "hinweis": "In dieser Ausbaustufe nur als Steckbrief im Profilkatalog (03) vorhanden."}
+    ]
+  },
+  {
+    "id": "aufgabentyp",
+    "text": "Was genau soll der Assistent dabei tun?",
+    "optionen": [
+      {"id": "quellen", "text": "Aktuelle Fakten recherchieren und mit Quellen belegen",
+       "bausteine": ["antwortstil-quellenpflicht"]},
+      {"id": "unterlagen", "text": "Ausschließlich mit Unterlagen arbeiten, die ich selbst bereitstelle",
+       "bausteine": ["wissen-nur-freigegebene-quellen"]},
+      {"id": "zusammenfassen", "text": "Nur vorhandenes Wissen zusammenfassen, ohne aktiv zu recherchieren",
+       "bausteine": []}
+    ]
+  },
+  {
+    "id": "risiko",
+    "text": "Wie streng sollen Grenzen für den Assistenten gelten?",
+    "optionen": [
+      {"id": "feste-grenzen", "text": "Feste, nicht verhandelbare Grenzen bei heiklen Themen",
+       "bausteine": ["leitplanke-keine-rechtsberatung"]},
+      {"id": "ohne-sperren", "text": "Sinnvolle Vorschläge reichen mir, ohne zusätzliche feste Sperren",
+       "bausteine": []}
+    ]
+  }
+]
