@@ -53,13 +53,17 @@ class TestApi(unittest.TestCase):
 
     def test_skripte_werden_ausgeliefert(self):
         """zustand.js zuerst -- app.js, dialog.js und export.js setzen die
-        Zustand-Schnittstelle beim eigenen Laden bereits voraus."""
-        for name in ["zustand.js", "app.js", "dialog.js", "export.js"]:
+        Zustand-Schnittstelle beim eigenen Laden bereits voraus.
+        graphlogik.js (reine Graphlogik, kein DOM) muss vor app.js geladen
+        werden, das sie aufruft."""
+        for name in ["zustand.js", "graphlogik.js", "app.js", "dialog.js", "export.js"]:
             self.assertEqual(self.client.get("/" + name).status_code, 200,
                              "Skript nicht ausgeliefert: " + name)
         seite = self.client.get("/").text
         self.assertLess(seite.index("zustand.js"), seite.index("app.js"),
                         "zustand.js muss vor app.js geladen werden")
+        self.assertLess(seite.index("graphlogik.js"), seite.index("app.js"),
+                        "graphlogik.js muss vor app.js geladen werden")
 
 
 if __name__ == "__main__":

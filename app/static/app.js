@@ -28,27 +28,6 @@
     });
   }
 
-  function abhaengigeVon(id) {
-    /* Alle gewaehlten Bausteine, die transitiv ueber benoetigt an id haengen. */
-    var gewaehlt = {};
-    Zustand.holeAuswahl().forEach(function (b) { gewaehlt[b] = true; });
-    var betroffen = {};
-    betroffen[id] = true;
-    var geaendert = true;
-    while (geaendert) {
-      geaendert = false;
-      kanten.forEach(function (kante) {
-        if (kante.typ === "benoetigt" && betroffen[kante.zu] &&
-            gewaehlt[kante.von] && !betroffen[kante.von]) {
-          betroffen[kante.von] = true;
-          geaendert = true;
-        }
-      });
-    }
-    delete betroffen[id];
-    return Object.keys(betroffen).sort();
-  }
-
   function pruefeUndSetze(bausteine) {
     return fetch("/api/auswahl/pruefen", {
       method: "POST",
@@ -79,7 +58,7 @@
       pruefeUndSetze(auswahl.concat([id]));
       return;
     }
-    var abhaengige = abhaengigeVon(id);
+    var abhaengige = Graphlogik.abhaengigeVon(id, kanten, auswahl);
     if (!abhaengige.length) {
       pruefeUndSetze(auswahl.filter(function (b) { return b !== id; }));
       return;
@@ -96,7 +75,8 @@
     var id = hinweis.dataset.id;
     var raus = {};
     raus[id] = true;
-    abhaengigeVon(id).forEach(function (b) { raus[b] = true; });
+    Graphlogik.abhaengigeVon(id, kanten, Zustand.holeAuswahl())
+      .forEach(function (b) { raus[b] = true; });
     hinweis.hidden = true;
     pruefeUndSetze(Zustand.holeAuswahl().filter(function (b) { return !raus[b]; }));
   }
