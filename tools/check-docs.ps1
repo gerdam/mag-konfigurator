@@ -1,9 +1,11 @@
 # check-docs.ps1 - lokales CI-Pruefskript (Beschluss E7 vom 17.07.2026)
-# Prueft alle .md/.txt unter docs\ und Dual-layer\ auf:
+# Prueft .md/.txt unter docs\ und Dual-layer\, README.md in der Wurzel sowie
+# .html/.js/.css/.json unter app\ (ausser cytoscape.min.js, Fremdcode) auf:
 #   1. gueltige UTF-8-Kodierung
 #   2. Mojibake-Muster (Folge der bekannten Kodierungsfehler-Historie)
 #   3. tote relative Markdown-Links
 #   4. Platzhalter (TODO/TBD/FIXME) in Konzeptdokumenten unter docs\
+# Ausserdem: alle .py/.ps1/.yml im Repo auf reines ASCII (Beschluss E12).
 # Exit-Code 0 = alles in Ordnung, 1 = Befunde. Aufruf auch per pre-commit-Hook.
 # Dateien unter protokolle\ sind historisch und werden bewusst NICHT geprueft.
 # Dieses Skript ist absichtlich reines ASCII; Sonderzeichen nur als \uXXXX-Regex-Escapes.
@@ -28,6 +30,19 @@ foreach ($ordner in @('docs', 'Dual-layer')) {
     if (Test-Path $pfad) {
         $dateien += Get-ChildItem -Path $pfad -Recurse -File -Include *.md, *.txt
     }
+}
+
+# app\ enthaelt das Frontend (viel deutscher Text/Sonderzeichen), aber auch
+# cytoscape.min.js: 373 KB Fremdcode von unpkg, ausdruecklich ausgenommen.
+$appPfad = Join-Path $repoRoot 'app'
+if (Test-Path $appPfad) {
+    $dateien += Get-ChildItem -Path $appPfad -Recurse -File -Include *.html, *.js, *.css, *.json |
+        Where-Object { $_.Name -ne 'cytoscape.min.js' }
+}
+
+$readme = Join-Path $repoRoot 'README.md'
+if (Test-Path $readme) {
+    $dateien += Get-Item $readme
 }
 
 foreach ($datei in $dateien) {
@@ -83,7 +98,24 @@ if ((Test-Path $katalog) -and (Get-Command python -ErrorAction SilentlyContinue)
     }
 }
 
-Write-Host ("check-docs: {0} Datei(en) geprueft." -f $dateien.Count)
+# 6. ASCII-Pflicht fuer .py/.ps1/.yml im ganzen Repo (Projektregel, Beschluss E12):
+# kein Byte > 127. .git\ wird nicht durchsucht, da versteckt (kein -Force noetig).
+$asciiDateien = Get-ChildItem -Path $repoRoot -Recurse -File -Include *.py, *.ps1, *.yml
+foreach ($datei in $asciiDateien) {
+    $relativ = $datei.FullName.Substring($repoRoot.Length + 1)
+    $bytes = [System.IO.File]::ReadAllBytes($datei.FullName)
+    for ($i = 0; $i -lt $bytes.Length; $i++) {
+        if ($bytes[$i] -gt 127) {
+            # Alle Bytes vor $i sind laut Schleifenbedingung reines ASCII.
+            $vorher = [System.Text.Encoding]::ASCII.GetString($bytes, 0, $i)
+            $zeile = ($vorher -split "`n").Count
+            $befunde.Add("$relativ : Nicht-ASCII-Byte (0x$('{0:X2}' -f $bytes[$i])) in Zeile $zeile")
+            break
+        }
+    }
+}
+
+Write-Host ("check-docs: {0} Datei(en) geprueft, {1} .py/.ps1/.yml-Datei(en) auf ASCII geprueft." -f $dateien.Count, $asciiDateien.Count)
 if ($befunde.Count -gt 0) {
     Write-Host "BEFUNDE:" -ForegroundColor Red
     $befunde | ForEach-Object { Write-Host "  $_" -ForegroundColor Red }

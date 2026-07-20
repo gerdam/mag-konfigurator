@@ -34,6 +34,7 @@ class TestExport(unittest.TestCase):
     def test_status_matrix_nennt_jeden_baustein(self):
         antwort = self.client.post("/api/export", json={
             "bausteine": MAG, "oberflaeche": "claude-ai-projekte"})
+        self.assertEqual(antwort.status_code, 200)
         daten = antwort.json()
         self.assertEqual([z["baustein"] for z in daten["status"]], MAG)
         status_websuche = [z for z in daten["status"]
@@ -55,6 +56,12 @@ class TestExport(unittest.TestCase):
         antwort = self.client.post("/api/export", json={
             "bausteine": MAG, "oberflaeche": "fax"})
         self.assertEqual(antwort.status_code, 400)
+
+    def test_unbekannte_bausteine_400(self):
+        antwort = self.client.post("/api/export", json={
+            "bausteine": MAG + ["baustein-erfunden"], "oberflaeche": "api"})
+        self.assertEqual(antwort.status_code, 400)
+        self.assertIn("baustein-erfunden", antwort.json()["detail"])
 
 
 if __name__ == "__main__":

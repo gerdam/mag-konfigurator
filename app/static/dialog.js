@@ -50,6 +50,7 @@ function dialogAuswerten() {
       return antwort.json();
     })
     .then(function (daten) {
+      verbergeFehler();
       ergebnis.textContent = "Kuratierter Vorschlag: " +
         daten.bausteine.join(", ") +
         " — prüfbar und veränderbar in der Netzwerkansicht.";
@@ -61,6 +62,16 @@ function dialogAuswerten() {
     });
 }
 
+var dialogFragenGeladen = false;
+
+function pruefeDialogFreigabe() {
+  if (dialogFragenGeladen && zustand.graphBereit) {
+    document.getElementById("dialog-auswerten").disabled = false;
+  }
+}
+
+document.addEventListener("graph-bereit", pruefeDialogFreigabe);
+
 fetch("/api/dialog")
   .then(function (antwort) {
     if (!antwort.ok) {
@@ -70,8 +81,10 @@ fetch("/api/dialog")
     return antwort.json();
   })
   .then(function (fragen) {
+    verbergeFehler();
     zeichneFragen(fragen);
-    document.getElementById("dialog-auswerten").disabled = false;
+    dialogFragenGeladen = true;
+    pruefeDialogFreigabe();
   })
   .catch(function () {
     zeigeFehler("Die Dialog-Fragen konnten nicht geladen werden. Bitte" +

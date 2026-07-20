@@ -8,12 +8,13 @@ var EBENEN_FARBEN = {
   leitplanken: "#dc2626"
 };
 
-var zustand = { cy: null, kanten: [], auswahl: [], konflikte: [] };
+var zustand = { cy: null, kanten: [], auswahl: [], konflikte: [],
+                graphBereit: false };
 
 function setzeAuswahl(bausteine, konflikte) {
   zustand.auswahl = bausteine;
   zustand.konflikte = konflikte;
-  zeichneZustand();
+  if (zustand.cy) { zeichneZustand(); }
   var anzeige = document.getElementById("auswahl-anzeige");
   anzeige.textContent = bausteine.length
     ? "Aktuelle Auswahl: " + bausteine.join(", ")
@@ -45,6 +46,10 @@ function zeigeFehler(text) {
   var textfeld = document.getElementById("fehler-text");
   textfeld.textContent = text;
   bereich.hidden = false;
+}
+
+function verbergeFehler() {
+  document.getElementById("fehler-bereich").hidden = true;
 }
 
 function zeichneZustand() {
@@ -93,7 +98,10 @@ function pruefeUndSetze(bausteine) {
       }
       return antwort.json();
     })
-    .then(function (daten) { setzeAuswahl(daten.bausteine, daten.konflikte); })
+    .then(function (daten) {
+      verbergeFehler();
+      setzeAuswahl(daten.bausteine, daten.konflikte);
+    })
     .catch(function () {
       zeigeFehler("Die Auswahl konnte nicht geprüft werden. Bitte laden Sie" +
         " die Seite neu und prüfen Sie, ob der Server noch läuft.");
@@ -139,6 +147,7 @@ function starteGraph() {
       return antwort.json();
     })
     .then(function (graph) {
+      verbergeFehler();
       zustand.kanten = graph.kanten;
       var elemente = graph.knoten.map(function (k) {
         return { data: { id: k.id, name: k.name, ebene: k.ebene } };
@@ -184,6 +193,8 @@ function starteGraph() {
       zustand.cy.on("tap", "node", function (ereignis) {
         knotenGeklickt(ereignis.target.id());
       });
+      zustand.graphBereit = true;
+      document.dispatchEvent(new CustomEvent("graph-bereit"));
       return fetch("/api/profil/mag-rechercheassistenz");
     })
     .then(function (antwort) {
