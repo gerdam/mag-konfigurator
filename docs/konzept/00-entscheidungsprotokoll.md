@@ -122,3 +122,13 @@ Siehe Roadmap in 05. Nicht Teil dieser Etappe.
   zuvor um 6 Dateien mit privaten Pfaden bereinigt; GitHub Actions führt
   `tools\check-docs.ps1` und die Python-Tests bei jedem Push aus
   (`.github/workflows/ci.yml`).
+- **CI-Trigger auf allen Branches (19.07.2026, Commit `2db9bad`):** Der
+  Workflow läuft auf `push` ohne Branch-Filter, nicht nur auf `main` wie im
+  AP5-Plan vorgesehen. Grund: Die Gegenprobe aus AP4-Task 9 (absichtlicher
+  Schemafehler muss die CI rot machen) lief auf dem Nebenbranch
+  `ci-gegenprobe` und wäre mit `branches: [main]` nie ausgelöst worden. Die
+  Abweichung war bis 20.07.2026 nur in der Commit-Message begründet und ist
+  hiermit nachgezogen. Seit 20.07.2026 verhindert zusätzlich eine
+  `concurrency`-Gruppe Doppelläufe, wenn `push` und `pull_request` denselben
+  Stand betreffen — mit `cancel-in-progress: false`, weil jeder Task-Commit
+  laut Arbeitsregel seinen eigenen grünen Lauf als CI-Nachweis behält.
