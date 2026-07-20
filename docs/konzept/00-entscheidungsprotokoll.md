@@ -41,6 +41,7 @@ nicht Teil dieses Konzepts.
 | E14 | Backend Prototyp | Web-App-Backend des Prototyps (Etappe B) in Python 3.13 + FastAPI | Von Michael am 19.07.2026 beschlossen (Empfehlung aus 05); bleibt beim vorhandenen Python-Stack (E12), keine neue Sprache im Projekt |
 | E15 | Graph-Rendering | Die Netzwerkansicht rendert mit Cytoscape.js (statt D3) | Von Michael am 19.07.2026 beschlossen (Empfehlung aus 05); graphspezifische Bibliothek reduziert Eigenbau für Knoten, Kanten und Interaktion |
 | E16 | Cytoscape-Einbindung | Cytoscape.js (Version 3.30.2) liegt als lokale Datei `app\static\cytoscape.min.js` im Repo — kein npm, kein Build-Werkzeug, kein CDN zur Laufzeit | Prototyp bleibt ohne Werkzeugkette lauffähig und offline nutzbar; eine Datei ist versionierbar und nachvollziehbar |
+| E17 | JS-Testinfrastruktur | JS-Tests laufen mit Nodes eingebautem Testrunner `node:test` samt schlankem DOM-Stub (`app\jstests\`) — kein npm, keine `package.json`, keine externe Bibliothek. Node ist reines Testwerkzeug; die Anwendung bleibt ohne Werkzeugkette lauffähig, E16 bleibt unberührt | Von Michael am 20.07.2026 beschlossen; der einzige echte Bug aus AP5 saß in der Bereitschafts-Naht (`wennBereit`) und wäre durch einen Unit-Test gefunden worden |
 
 ## Etappenplan
 
