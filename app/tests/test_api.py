@@ -51,6 +51,16 @@ class TestApi(unittest.TestCase):
     def test_cytoscape_bibliothek_wird_ausgeliefert(self):
         self.assertEqual(self.client.get("/cytoscape.min.js").status_code, 200)
 
+    def test_skripte_werden_ausgeliefert(self):
+        """zustand.js zuerst -- app.js, dialog.js und export.js setzen die
+        Zustand-Schnittstelle beim eigenen Laden bereits voraus."""
+        for name in ["zustand.js", "app.js", "dialog.js", "export.js"]:
+            self.assertEqual(self.client.get("/" + name).status_code, 200,
+                             "Skript nicht ausgeliefert: " + name)
+        seite = self.client.get("/").text
+        self.assertLess(seite.index("zustand.js"), seite.index("app.js"),
+                        "zustand.js muss vor app.js geladen werden")
+
 
 if __name__ == "__main__":
     unittest.main()
