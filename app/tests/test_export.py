@@ -25,9 +25,11 @@ class TestExport(unittest.TestCase):
         daten = antwort.json()
         self.assertEqual(daten["profil"], "mag-rechercheassistenz")
         self.assertEqual(sorted(daten["dateien"]), ["CLAUDE.md", "settings.json"])
-        soll = (REPO / "artefakte" / "mag-rechercheassistenz" / "CLAUDE.md"
-                ).read_text(encoding="utf-8")
-        self.assertEqual(daten["dateien"]["CLAUDE.md"], soll)
+        for dateiname in sorted(daten["dateien"]):
+            soll = (REPO / "artefakte" / "mag-rechercheassistenz" / dateiname
+                    ).read_text(encoding="utf-8")
+            self.assertEqual(daten["dateien"][dateiname], soll,
+                              "Inhalt weicht ab bei Datei: " + dateiname)
 
     def test_status_matrix_nennt_jeden_baustein(self):
         antwort = self.client.post("/api/export", json={
