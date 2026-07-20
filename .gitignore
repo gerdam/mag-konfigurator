@@ -2,8 +2,11 @@ katalog/index.sqlite
 graph/
 __pycache__/
 *.pyc
-Claude-plan-dump-user-17072026.txt
-Claude-plan-weitergabe-ab4-18072026.md
+# Terminal-Dumps und Plan-Notizen aus Claude-Sessions (Wurzel, enthalten private Pfade)
+Claude-plan-*
+# Screenshots im Wurzelverzeichnis (Arbeitsmaterial, gehoert nicht ins oeffentliche Repo)
+/*.png
+/*.jpg
 Dual-layer/Codex-Installation-13072026.md
 Dual-layer/Trialog-Etappe2-Arbeitsplan-ENTWURF-2026-07-13.md
 protokolle/Konfigurator-Konfigurator-OPENAI-COdex-13072026.md
