@@ -21,6 +21,9 @@ from app.auswahl import finde_konflikte, mit_pflichtnachzug  # noqa: E402
 
 from app.dialog import lade_fragen, werte_aus  # noqa: E402
 
+from app.export import (ARTEFAKT_DATEIEN, finde_profil, lade_artefakte,
+                        status_matrix)  # noqa: E402
+
 
 def lade_katalog():
     bausteine, befunde = lade_bausteine(REPO / "katalog" / "bausteine")
@@ -77,6 +80,27 @@ def dialog_auswerten(antworten: dict):
     except ValueError as fehler:
         raise HTTPException(400, str(fehler))
     return {"bausteine": auswahl, "konflikte": konflikte}
+
+
+@app.post("/api/export")
+def export(daten: dict):
+    oberflaeche = daten.get("oberflaeche")
+    if oberflaeche not in ARTEFAKT_DATEIEN:
+        raise HTTPException(400, f"Unbekannte Oberflaeche '{oberflaeche}'")
+    gewaehlt = daten.get("bausteine") or []
+    unbekannt = [b for b in gewaehlt if b not in BAUSTEINE]
+    if unbekannt:
+        raise HTTPException(400, f"Unbekannte Bausteine: {', '.join(unbekannt)}")
+    if finde_konflikte(BAUSTEINE, gewaehlt):
+        raise HTTPException(409, "Export gesperrt: ungeloeste Konflikt-Warnung")
+    profil_id = finde_profil(PROFILE, gewaehlt)
+    if profil_id is None:
+        raise HTTPException(404, ("Keine passende kuratierte Zusammenstellung:"
+                                  " in dieser Ausbaustufe sind nur vollstaendig"
+                                  " gepflegte Profile exportierbar"))
+    return {"profil": profil_id,
+            "status": status_matrix(BAUSTEINE, gewaehlt, oberflaeche),
+            "dateien": lade_artefakte(profil_id, oberflaeche)}
 
 
 app.mount("/", StaticFiles(directory=Path(__file__).resolve().parent / "static",

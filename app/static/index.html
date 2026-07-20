@@ -43,9 +43,22 @@
     </div>
     <p id="auswahl-anzeige"></p>
   </section>
+  <section id="export-bereich">
+    <h2>Export</h2>
+    <p>Vor dem Export zeigt der Konfigurator je Baustein den
+    <code>adapter_status</code> der gewählten Oberfläche (✓ vollständig,
+    ⚠ eingeschränkt, ✗ nicht umsetzbar) — erst danach lässt sich das
+    Artefakt anzeigen.</p>
+    <button type="button" data-oberflaeche="claude-code" disabled>Claude Code</button>
+    <button type="button" data-oberflaeche="claude-ai-projekte" disabled>claude.ai-Projekte</button>
+    <button type="button" data-oberflaeche="api" disabled>API</button>
+    <div id="export-status"></div>
+    <div id="export-dateien"></div>
+  </section>
 </main>
 <script src="cytoscape.min.js"></script>
 <script src="app.js"></script>
 <script src="dialog.js"></script>
+<script src="export.js"></script>
 </body>
 </html>
