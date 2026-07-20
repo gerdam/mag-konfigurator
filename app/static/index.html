@@ -14,6 +14,15 @@
   ein kuratierter Vorschlag zur eigenen Entscheidung.</p>
 </header>
 <main>
+  <section id="dialog-bereich">
+    <h2>Geführter Dialog</h2>
+    <p>Drei Fragen in fester Reihenfolge — das Ergebnis ist ein kuratierter
+    Vorschlag, kein fertiges Urteil. Ausgegraute Bereiche sind in dieser
+    Ausbaustufe nur als Steckbrief vorhanden.</p>
+    <div id="dialog-fragen"></div>
+    <button id="dialog-auswerten" type="button">Vorschlag erstellen</button>
+    <p id="dialog-ergebnis"></p>
+  </section>
   <section id="graph-bereich">
     <h2>Netzwerkansicht</h2>
     <p>Knotenfarbe = Wirkungsebene (Blau Identität, Grün Verhalten, Gelb
@@ -37,5 +46,6 @@
 </main>
 <script src="cytoscape.min.js"></script>
 <script src="app.js"></script>
+<script src="dialog.js"></script>
 </body>
 </html>
