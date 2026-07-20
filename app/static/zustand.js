@@ -7,6 +7,7 @@ var Zustand = (function () {
   var auswahl = [];
   var konflikte = [];
   var bereitschaft = {};
+  var fehlerNachQuelle = {};
 
   function zeigeKonflikte() {
     var bereich = document.getElementById("konflikt-bereich");
@@ -28,6 +29,24 @@ var Zustand = (function () {
 
   function alleBereit(namen) {
     return namen.every(function (name) { return Boolean(bereitschaft[name]); });
+  }
+
+  function zeigeFehleranzeige() {
+    /* #fehler-bereich ist sichtbar, solange mindestens eine Quelle eine
+       Meldung hinterlegt hat. Mehrere aktive Meldungen werden durch
+       Zeilenumbruch sichtbar getrennt -- textContent, kein innerHTML. */
+    var bereich = document.getElementById("fehler-bereich");
+    var textfeld = document.getElementById("fehler-text");
+    var quellen = Object.keys(fehlerNachQuelle);
+    if (!quellen.length) {
+      bereich.hidden = true;
+      textfeld.textContent = "";
+      return;
+    }
+    textfeld.textContent = quellen.map(function (quelle) {
+      return fehlerNachQuelle[quelle];
+    }).join("\n");
+    bereich.hidden = false;
   }
 
   return {
@@ -75,14 +94,13 @@ var Zustand = (function () {
         document.addEventListener("bereit-geaendert", pruefen);
       }
     },
-    zeigeFehler: function (text) {
-      var bereich = document.getElementById("fehler-bereich");
-      var textfeld = document.getElementById("fehler-text");
-      textfeld.textContent = text;
-      bereich.hidden = false;
+    zeigeFehler: function (quelle, text) {
+      fehlerNachQuelle[quelle] = text;
+      zeigeFehleranzeige();
     },
-    verbergeFehler: function () {
-      document.getElementById("fehler-bereich").hidden = true;
+    verbergeFehler: function (quelle) {
+      delete fehlerNachQuelle[quelle];
+      zeigeFehleranzeige();
     }
   };
 })();

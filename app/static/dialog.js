@@ -50,7 +50,7 @@ function dialogAuswerten() {
       return antwort.json();
     })
     .then(function (daten) {
-      Zustand.verbergeFehler();
+      Zustand.verbergeFehler("dialogfragen");
       ergebnis.textContent = "Kuratierter Vorschlag: " +
         daten.bausteine.join(", ") +
         " — prüfbar und veränderbar in der Netzwerkansicht.";
@@ -75,12 +75,12 @@ fetch("/api/dialog")
     return antwort.json();
   })
   .then(function (fragen) {
-    Zustand.verbergeFehler();
+    Zustand.verbergeFehler("dialogfragen");
     zeichneFragen(fragen);
     Zustand.meldeBereit("dialogfragen");
   })
   .catch(function () {
-    Zustand.zeigeFehler("Die Dialog-Fragen konnten nicht geladen werden. Bitte" +
+    Zustand.zeigeFehler("dialogfragen", "Die Dialog-Fragen konnten nicht geladen werden. Bitte" +
       " laden Sie die Seite neu und prüfen Sie, ob der Server noch läuft.");
   });
 document.getElementById("dialog-auswerten")

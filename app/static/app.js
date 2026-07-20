@@ -62,11 +62,11 @@
         return antwort.json();
       })
       .then(function (daten) {
-        Zustand.verbergeFehler();
+        Zustand.verbergeFehler("graph");
         Zustand.setzeAuswahl(daten.bausteine, daten.konflikte);
       })
       .catch(function () {
-        Zustand.zeigeFehler("Die Auswahl konnte nicht geprüft werden. Bitte laden Sie" +
+        Zustand.zeigeFehler("graph", "Die Auswahl konnte nicht geprüft werden. Bitte laden Sie" +
           " die Seite neu und prüfen Sie, ob der Server noch läuft.");
       });
   }
@@ -111,7 +111,7 @@
         return antwort.json();
       })
       .then(function (graph) {
-        Zustand.verbergeFehler();
+        Zustand.verbergeFehler("graph");
         kanten = graph.kanten;
         var elemente = graph.knoten.map(function (k) {
           return { data: { id: k.id, name: k.name, ebene: k.ebene } };
@@ -169,7 +169,7 @@
       })
       .then(function (profil) { return pruefeUndSetze(profil.bausteine); })
       .catch(function () {
-        Zustand.zeigeFehler("Der Netzwerk-Graph konnte nicht geladen werden. Bitte" +
+        Zustand.zeigeFehler("graph", "Der Netzwerk-Graph konnte nicht geladen werden. Bitte" +
           " laden Sie die Seite neu und prüfen Sie, ob der Server noch läuft.");
       });
   }

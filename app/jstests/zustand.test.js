@@ -168,7 +168,7 @@ test('realer Fehlerfall: nur dialogfragen meldet sich, graph nie - fn laeuft nie
 
 test('zeigeFehler setzt den Text und macht den Bereich sichtbar', () => {
   const { Zustand, document } = neuerZustand();
-  Zustand.zeigeFehler('Etwas ist schiefgelaufen.');
+  Zustand.zeigeFehler('graph', 'Etwas ist schiefgelaufen.');
   assert.equal(
     document.getElementById('fehler-text').textContent,
     'Etwas ist schiefgelaufen.'
@@ -176,9 +176,50 @@ test('zeigeFehler setzt den Text und macht den Bereich sichtbar', () => {
   assert.equal(document.getElementById('fehler-bereich').hidden, false);
 });
 
-test('verbergeFehler versteckt den Fehler-Bereich wieder', () => {
+test('verbergeFehler versteckt den Fehler-Bereich wieder, wenn keine Quelle mehr aktiv ist', () => {
   const { Zustand, document } = neuerZustand();
-  Zustand.zeigeFehler('Fehler');
-  Zustand.verbergeFehler();
+  Zustand.zeigeFehler('graph', 'Fehler');
+  Zustand.verbergeFehler('graph');
   assert.equal(document.getElementById('fehler-bereich').hidden, true);
+});
+
+test('zwei Quellen gleichzeitig aktiv zeigen beide Texte', () => {
+  const { Zustand, document } = neuerZustand();
+  Zustand.zeigeFehler('graph', 'Graph-Fehler.');
+  Zustand.zeigeFehler('dialogfragen', 'Dialog-Fehler.');
+  const text = document.getElementById('fehler-text').textContent;
+  assert.match(text, /Graph-Fehler\./);
+  assert.match(text, /Dialog-Fehler\./);
+  assert.equal(document.getElementById('fehler-bereich').hidden, false);
+});
+
+test('eine Quelle verbergen laesst die andere sichtbar und den Bereich sichtbar', () => {
+  const { Zustand, document } = neuerZustand();
+  Zustand.zeigeFehler('graph', 'Graph-Fehler.');
+  Zustand.zeigeFehler('dialogfragen', 'Dialog-Fehler.');
+  Zustand.verbergeFehler('graph');
+  const text = document.getElementById('fehler-text').textContent;
+  assert.doesNotMatch(text, /Graph-Fehler\./);
+  assert.match(text, /Dialog-Fehler\./);
+  assert.equal(document.getElementById('fehler-bereich').hidden, false);
+});
+
+test('die letzte aktive Quelle verbergen versteckt den Bereich wieder', () => {
+  const { Zustand, document } = neuerZustand();
+  Zustand.zeigeFehler('graph', 'Graph-Fehler.');
+  Zustand.zeigeFehler('dialogfragen', 'Dialog-Fehler.');
+  Zustand.verbergeFehler('graph');
+  Zustand.verbergeFehler('dialogfragen');
+  assert.equal(document.getElementById('fehler-bereich').hidden, true);
+  assert.equal(document.getElementById('fehler-text').textContent, '');
+});
+
+test('dieselbe Quelle zweimal zeigen ersetzt die Meldung statt sie zu sammeln', () => {
+  const { Zustand, document } = neuerZustand();
+  Zustand.zeigeFehler('graph', 'Erster Fehler.');
+  Zustand.zeigeFehler('graph', 'Zweiter Fehler.');
+  assert.equal(
+    document.getElementById('fehler-text').textContent,
+    'Zweiter Fehler.'
+  );
 });
