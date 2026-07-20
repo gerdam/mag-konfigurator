@@ -40,6 +40,13 @@ function zeigeKonflikte() {
   bereich.hidden = false;
 }
 
+function zeigeFehler(text) {
+  var bereich = document.getElementById("fehler-bereich");
+  var textfeld = document.getElementById("fehler-text");
+  textfeld.textContent = text;
+  bereich.hidden = false;
+}
+
 function zeichneZustand() {
   var gewaehlt = {};
   zustand.auswahl.forEach(function (id) { gewaehlt[id] = true; });
@@ -79,8 +86,18 @@ function pruefeUndSetze(bausteine) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ bausteine: bausteine })
-  }).then(function (antwort) { return antwort.json(); })
-    .then(function (daten) { setzeAuswahl(daten.bausteine, daten.konflikte); });
+  }).then(function (antwort) {
+      if (!antwort.ok) {
+        throw new Error("Fehlerantwort von /api/auswahl/pruefen (Status " +
+          antwort.status + ")");
+      }
+      return antwort.json();
+    })
+    .then(function (daten) { setzeAuswahl(daten.bausteine, daten.konflikte); })
+    .catch(function () {
+      zeigeFehler("Die Auswahl konnte nicht geprüft werden. Bitte laden Sie" +
+        " die Seite neu und prüfen Sie, ob der Server noch läuft.");
+    });
 }
 
 function knotenGeklickt(id) {
@@ -114,7 +131,13 @@ function hinweisBestaetigt() {
 
 function starteGraph() {
   fetch("/api/graph")
-    .then(function (antwort) { return antwort.json(); })
+    .then(function (antwort) {
+      if (!antwort.ok) {
+        throw new Error("Fehlerantwort von /api/graph (Status " +
+          antwort.status + ")");
+      }
+      return antwort.json();
+    })
     .then(function (graph) {
       zustand.kanten = graph.kanten;
       var elemente = graph.knoten.map(function (k) {
@@ -163,8 +186,18 @@ function starteGraph() {
       });
       return fetch("/api/profil/mag-rechercheassistenz");
     })
-    .then(function (antwort) { return antwort.json(); })
-    .then(function (profil) { return pruefeUndSetze(profil.bausteine); });
+    .then(function (antwort) {
+      if (!antwort.ok) {
+        throw new Error("Fehlerantwort von /api/profil/mag-rechercheassistenz" +
+          " (Status " + antwort.status + ")");
+      }
+      return antwort.json();
+    })
+    .then(function (profil) { return pruefeUndSetze(profil.bausteine); })
+    .catch(function () {
+      zeigeFehler("Der Netzwerk-Graph konnte nicht geladen werden. Bitte" +
+        " laden Sie die Seite neu und prüfen Sie, ob der Server noch läuft.");
+    });
 }
 
 document.getElementById("hinweis-bestaetigen")
