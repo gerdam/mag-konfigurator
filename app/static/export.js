@@ -2,6 +2,8 @@
 var STATUS_SYMBOLE = { supported: "✓", degraded: "⚠",
                        unsupported: "✗" };
 
+var aktuelleAuswahl = [];
+
 function exportAnfragen(oberflaeche) {
   var status = document.getElementById("export-status");
   var dateien = document.getElementById("export-dateien");
@@ -10,7 +12,7 @@ function exportAnfragen(oberflaeche) {
   fetch("/api/export", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ bausteine: zustand.auswahl,
+    body: JSON.stringify({ bausteine: aktuelleAuswahl,
                            oberflaeche: oberflaeche })
   }).then(function (antwort) {
       return antwort.json().then(function (daten) {
@@ -61,8 +63,10 @@ document.querySelectorAll("#export-bereich button[data-oberflaeche]")
       exportAnfragen(knopf.dataset.oberflaeche);
     });
   });
-document.addEventListener("auswahl-geaendert", function () {
-  var gesperrt = zustand.konflikte.length > 0 || zustand.auswahl.length === 0;
+document.addEventListener("auswahl-geaendert", function (ereignis) {
+  aktuelleAuswahl = ereignis.detail.auswahl;
+  var gesperrt = ereignis.detail.konflikte.length > 0 ||
+    ereignis.detail.auswahl.length === 0;
   document.querySelectorAll("#export-bereich button[data-oberflaeche]")
     .forEach(function (knopf) { knopf.disabled = gesperrt; });
 });

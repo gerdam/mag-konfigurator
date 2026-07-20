@@ -50,11 +50,11 @@ function dialogAuswerten() {
       return antwort.json();
     })
     .then(function (daten) {
-      verbergeFehler();
+      Zustand.verbergeFehler();
       ergebnis.textContent = "Kuratierter Vorschlag: " +
         daten.bausteine.join(", ") +
         " — prüfbar und veränderbar in der Netzwerkansicht.";
-      setzeAuswahl(daten.bausteine, daten.konflikte);
+      Zustand.setzeAuswahl(daten.bausteine, daten.konflikte);
     })
     .catch(function () {
       ergebnis.textContent = "Der Vorschlag konnte nicht erstellt werden." +
@@ -62,15 +62,9 @@ function dialogAuswerten() {
     });
 }
 
-var dialogFragenGeladen = false;
-
-function pruefeDialogFreigabe() {
-  if (dialogFragenGeladen && zustand.graphBereit) {
-    document.getElementById("dialog-auswerten").disabled = false;
-  }
-}
-
-document.addEventListener("graph-bereit", pruefeDialogFreigabe);
+Zustand.wennBereit(["graph", "dialogfragen"], function () {
+  document.getElementById("dialog-auswerten").disabled = false;
+});
 
 fetch("/api/dialog")
   .then(function (antwort) {
@@ -81,13 +75,12 @@ fetch("/api/dialog")
     return antwort.json();
   })
   .then(function (fragen) {
-    verbergeFehler();
+    Zustand.verbergeFehler();
     zeichneFragen(fragen);
-    dialogFragenGeladen = true;
-    pruefeDialogFreigabe();
+    Zustand.meldeBereit("dialogfragen");
   })
   .catch(function () {
-    zeigeFehler("Die Dialog-Fragen konnten nicht geladen werden. Bitte" +
+    Zustand.zeigeFehler("Die Dialog-Fragen konnten nicht geladen werden. Bitte" +
       " laden Sie die Seite neu und prüfen Sie, ob der Server noch läuft.");
   });
 document.getElementById("dialog-auswerten")
