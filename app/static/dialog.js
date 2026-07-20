@@ -69,7 +69,10 @@ fetch("/api/dialog")
     }
     return antwort.json();
   })
-  .then(zeichneFragen)
+  .then(function (fragen) {
+    zeichneFragen(fragen);
+    document.getElementById("dialog-auswerten").disabled = false;
+  })
   .catch(function () {
     zeigeFehler("Die Dialog-Fragen konnten nicht geladen werden. Bitte" +
       " laden Sie die Seite neu und prüfen Sie, ob der Server noch läuft.");
